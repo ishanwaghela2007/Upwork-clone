@@ -1,8 +1,8 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import UserLayout from './UserLayout';
-import Home from './pages/Home/Home';
+import UserLayout from './User/Userlayout';
+import Home from './User/Pages/Home/Home';
 
 const App = () => {
   return (
