@@ -1,10 +1,22 @@
-import React from 'react'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
-const Userlayout=()=> {
-  return
-  (
-    <p>userlayout</p>
-  )
-}
 
-export default Userlayout
+
+const UserLayout = () => {
+ 
+  return (
+    <>
+      
+      <Navbar />
+      <Outlet />
+      <Footer/>
+      
+    
+    </>
+  );
+};
+
+export default UserLayout;
