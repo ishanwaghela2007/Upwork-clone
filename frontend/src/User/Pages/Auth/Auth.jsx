@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Auth=()=> {
+const  Auth=()=> {
   return (
-    <p>Auth</p>
+   <p>Auth</p>
   )
 }
 

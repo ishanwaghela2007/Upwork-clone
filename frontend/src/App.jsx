@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserLayout from './User/Userlayout';
 import Home from './User/Pages/Home/Home';
-import Auth from './User/Pages/Auth';
+import Auth from './User/Pages/Auth/Auth';
 
 
 const App = () => {

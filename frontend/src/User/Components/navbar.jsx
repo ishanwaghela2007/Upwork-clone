@@ -10,7 +10,7 @@ const Navbar = () => {
         <h1 className="text-white text-2xl font-bold">MyApp</h1>
         <ul className="flex space-x-4">
           <li>
-            <Link to="/login" className="text-white hover:bg-gray-700 px-3 py-2 rounded">Home</Link>
+            <Link to="/Auth" className="text-white hover:bg-gray-700 px-3 py-2 rounded">Home</Link>
           </li>
           <li>
             <a href="#about" className="text-white hover:bg-gray-700 px-3 py-2 rounded">About</a>
