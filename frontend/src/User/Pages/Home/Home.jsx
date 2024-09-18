@@ -2,9 +2,6 @@ import React from 'react'
 import { AiFillAlert } from "react-icons/ai";
 import './home.css';
 
-
-
-
 const Home=() =>{
   return (
     <>

@@ -1,29 +1,33 @@
-
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-white text-2xl font-bold">MyApp</h1>
-        <ul className="flex space-x-4">
-          <li>
-            <Link to="/Auth" className="text-white hover:bg-gray-700 px-3 py-2 rounded">Home</Link>
-          </li>
-          <li>
-            <a href="#about" className="text-white hover:bg-gray-700 px-3 py-2 rounded">About</a>
-          </li>
-          <li>
-            <a href="#services" className="text-white hover:bg-gray-700 px-3 py-2 rounded">Services</a>
-          </li>
-          <li>
-            <a href="#contact" className="text-white hover:bg-gray-700 px-3 py-2 rounded">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+<div className="h-30 bg-white text-black">
+  {/* Transparent Navbar */}
+  <nav className={`fixed w-full z-10 transition-all duration-300 ${isScrolled ? 'bg-white/75 backdrop-blur-md' : 'bg-transparent'}`}>
+    <div className="container mx-auto px-4 py-2 flex justify-between items-center">
+      <Link to="/" className="text-xl font-bold">
+        Freelance India
+      </Link>
+      <ul className="flex space-x-4">
+        <li><Link to="/Home" className="hover:text-gray-500 transition-colors">Home</Link></li>
+        <li><Link to="/about" className="hover:text-gray-500 transition-colors">About</Link></li>
+        <li><Link to="/services" className="hover:text-gray-500 transition-colors">Services</Link></li>
+        <li><Link to="/contact" className="hover:text-gray-500 transition-colors">Contact</Link></li>
+      </ul>
+    </div>
+  </nav>
+</div>
   );
 };
 

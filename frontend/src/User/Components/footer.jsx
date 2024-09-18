@@ -1,26 +1,30 @@
 // src/components/Footer.js
-
 import React from 'react';
+import { FaInstagram, FaFacebook } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <p className="text-sm">© 2024 MyApp. All rights reserved.</p>
-        <ul className="flex space-x-4">
-          <li>
-            <a href="#privacy" className="hover:text-gray-400">Privacy Policy</a>
-          </li>
-          <li>
-            <a href="#terms" className="hover:text-gray-400">Terms of Service</a>
-          </li>
-          <li>
-            <a href="#contact" className="hover:text-gray-400">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </footer>
+    <footer className="bg-gray-800 text-white py-8">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-bold">Freelance India</h2>
+            <p className="text-sm">Connect. Create. Succeed.</p>
+          </div>
+          <div className="flex justify-center space-x-4">
+            <a href="https://www.instagram.com/cyb3r.ishanwaghela/?__pwa=1" target="_blank" className="hover:text-gray-300">
+              <FaInstagram size={24} />
+            </a>
+            <a href="https://facebook.com" className="hover:text-gray-300">
+              <FaFacebook  size={24} />
+            </a>
+          </div>
+          <div className="text-center mt-4 text-sm">
+            © 2024 Freelance India. All rights reserved.
+          </div>
+        </div>
+      </footer>
   );
 };
 
 export default Footer;
+
