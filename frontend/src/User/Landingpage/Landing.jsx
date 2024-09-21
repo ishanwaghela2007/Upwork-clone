@@ -26,6 +26,9 @@ const Landing = () => {
       />
     </div>
   </div>
+  <>
+  
+  </>
 </main>
   )
 };
