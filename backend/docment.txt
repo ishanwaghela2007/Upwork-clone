@@ -1,0 +1,5 @@
+use this command in terminal:
+npm init -y
+npm install express dotenv
+npm install --save-dev nodemon
+npm install mongoose
