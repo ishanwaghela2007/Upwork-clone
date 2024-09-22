@@ -1,6 +1,6 @@
 // src/components/Footer.js
 import React from 'react';
-import { FaInstagram, FaFacebook } from 'react-icons/fa';
+import { FaInstagram, FaTwitter} from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -14,8 +14,8 @@ const Footer = () => {
             <a href="https://www.instagram.com/cyb3r.ishanwaghela/?__pwa=1" target="_blank" className="hover:text-gray-300">
               <FaInstagram size={24} />
             </a>
-            <a href="https://facebook.com" className="hover:text-gray-300">
-              <FaFacebook  size={24} />
+            <a href="https://x.com/IshanWaghe8400" target="_blank" className="hover:text-gray-300">
+              <FaTwitter size={24} />
             </a>
           </div>
           <div className="text-center mt-4 text-sm">
