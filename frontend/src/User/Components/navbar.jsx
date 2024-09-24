@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import LanguageChanger from './languagechanger';
+import WebTranslator from './languagechanger';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,7 +27,7 @@ const Navbar = () => {
         <li><Link to="/contact" className="hover:text-gray-500 transition-colors">Contact</Link></li>
       </ul>
       <div className='ml-4'>
-
+       <WebTranslator/>
       </div>
     </div>
   </nav>

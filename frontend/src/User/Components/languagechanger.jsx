@@ -1,97 +1,104 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Select, 
-  MenuItem, 
-  FormControl, 
-  InputLabel, 
-  ThemeProvider, 
-  createTheme, 
-  CssBaseline 
-} from '@mui/material';
+import { Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Box } from '@mui/system';
 
 const languages = [
-  { value: 'en', label: 'English' },
-  { value: 'es', label: 'Español' },
-  { value: 'fr', label: 'Français' },
-  { value: 'de', label: 'Deutsch' },
-  { value: 'it', label: 'Italiano' },
-  { value: 'ja', label: '日本語' },
-  { value: 'ko', label: '한국어' },
-  { value: 'zh-CN', label: '中文 (简体)' },
+  { value: 'en', label: 'English', symbol: 'A' },
+  { value: 'hi', label: 'हिन्दी', symbol: 'अ' },  // Hindi with Devanagari script symbol 
 ];
-const LanguageChanger = () => {
-  const [language, setLanguage] = useState('en');
+
+export default function WebTranslator() {
+  const [currentLanguage, setCurrentLanguage] = useState('en');
 
   useEffect(() => {
     // Load Google Translate script
     const script = document.createElement('script');
-    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     script.async = true;
     document.body.appendChild(script);
 
     // Initialize Google Translate
     window.googleTranslateElementInit = () => {
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: 'en',
-          includedLanguages: languages.map(lang => lang.value).join(','),
-          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-          autoDisplay: false,
-        },
-        'google_translate_element'
-      );
-    };
-
-    return () => {
-      // Clean up the script
-      document.body.removeChild(script);
-      delete window.googleTranslateElementInit;
-    };
-  }, []);
-
-  useEffect(() => {
-    const changeLanguage = () => {
-      const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = language;
-        select.dispatchEvent(new Event('change'));
+      if (window.google && window.google.translate) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi,mr',
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false,
+          },
+          'google_translate_element'
+        );
       }
     };
 
-    if (window.google && window.google.translate) {
-      changeLanguage();
-    }
-  }, [language]);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
-  const handleChange = (event) => {
-    setLanguage(event.target.value);
+  const changeLanguage = (lang) => {
+    if (lang === 'hi') {
+      const confirmSwitch = window.confirm("This will lead you to हिंदी language. Are you sure you want to switch to this language?");
+      if (!confirmSwitch) {
+        return;
+      }
+    }
+
+    setCurrentLanguage(lang);
+
+    const googleFrame = document.getElementsByClassName('goog-te-menu-frame')[0];
+    if (googleFrame) {
+      const googleFrameDoc = googleFrame.contentDocument || googleFrame.contentWindow?.document;
+      if (googleFrameDoc) {
+        const languageSelect = googleFrameDoc.getElementsByTagName('table')[0];
+        const languageOptions = languageSelect.getElementsByTagName('td');
+
+        for (let i = 0; i < languageOptions.length; i++) {
+          if (languageOptions[i].innerHTML.includes(lang)) {
+            languageOptions[i].click();
+            break;
+          }
+        }
+      }
+    }
   };
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
-        <FormControl variant="outlined" style={{ minWidth: 200 }}>
-          <InputLabel id="language-select-label">Language</InputLabel>
-          <Select
-            labelId="language-select-label"
-            id="language-select"
-            value={language}
-            onChange={handleChange}
-            label="Language"
+    <div className="fixed top-4 right-4 z-50 bg-white p-4 rounded-lg shadow-md">
+      <div className="flex items-center space-x-2">
+        {/* Custom button with symbol and language */}
+        <Box display="flex" alignItems="center">
+          <Button
+            variant="contained"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '70px',
+              padding: '8px',
+              backgroundColor: '#333',
+              color: '#fff',
+            }}
+            onClick={() => changeLanguage('hi')}
           >
-            {languages.map((lang) => (
-              <MenuItem key={lang.value} value={lang.value}>
-                {lang.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      <div id="google_translate_element" style={{ display: 'block', zIndex: 999 }}></div>
-
+            <span
+              style={{
+                backgroundColor: '#000',
+                color: '#fff',
+                padding: '4px',
+                marginRight: '8px',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              {languages.find(lang => lang.value === currentLanguage)?.symbol}
+            </span>
+            {languages.find(lang => lang.value === currentLanguage)?.label}
+          </Button>
+        </Box>
       </div>
-    </ThemeProvider>
+      <div id="google_translate_element" className="hidden"></div>
+    </div>
   );
-};
-
-export default LanguageChanger;
+}

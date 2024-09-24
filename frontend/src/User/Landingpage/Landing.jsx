@@ -37,7 +37,7 @@ const Landing = () => {
   );
   return (
 <main className="flex-grow container mx-auto px-4 py-20">
-  <div className="flex flex-col md:flex-row items-center justify-between mt-16 space-y-8 md:space-y-0 md:space-x-8">
+  <div className="flex flex-col md:flex-row items-center justify-between mt-16 space-y-8 md:space-y-0 md:space-x-9">
     {/* Left Section: Text Content */}
     <div className="md:w-1/2">
       <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
@@ -83,6 +83,7 @@ const Landing = () => {
       </section>
     <>
     {/*third main component*/}
+    
     </>
   </>
 </main>
