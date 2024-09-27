@@ -15,21 +15,24 @@ export default function WebTranslator() {
     const script = document.createElement('script');
     script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     script.async = true;
+    script.onload = () => {
+      if (window.google && window.google.translate) {
+        window.googleTranslateElementInit();
+      }
+    };
     document.body.appendChild(script);
 
     // Initialize Google Translate
     window.googleTranslateElementInit = () => {
-      if (window.google && window.google.translate) {
-        new window.google.translate.TranslateElement(
-          {
-            pageLanguage: 'en',
-            includedLanguages: 'en,hi,mr',
-            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-            autoDisplay: false,
-          },
-          'google_translate_element'
-        );
-      }
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: 'en',
+          includedLanguages: 'en,hi',  // Only including necessary languages
+          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false,
+        },
+        'google_translate_element'
+      );
     };
 
     return () => {
@@ -39,7 +42,9 @@ export default function WebTranslator() {
 
   const changeLanguage = (lang) => {
     if (lang === 'hi') {
-      const confirmSwitch = window.confirm("This will lead you to हिंदी language. Are you sure you want to switch to this language?");
+      const confirmSwitch = window.confirm(
+        "This will lead you to हिंदी language. Are you sure you want to switch to this language?"
+      );
       if (!confirmSwitch) {
         return;
       }
@@ -47,18 +52,15 @@ export default function WebTranslator() {
 
     setCurrentLanguage(lang);
 
-    const googleFrame = document.getElementsByClassName('goog-te-menu-frame')[0];
+    // Simulate a language switch by changing the language code in the Translate iframe
+    const googleFrame = document.querySelector('iframe.goog-te-menu-frame');
     if (googleFrame) {
       const googleFrameDoc = googleFrame.contentDocument || googleFrame.contentWindow?.document;
       if (googleFrameDoc) {
-        const languageSelect = googleFrameDoc.getElementsByTagName('table')[0];
-        const languageOptions = languageSelect.getElementsByTagName('td');
-
-        for (let i = 0; i < languageOptions.length; i++) {
-          if (languageOptions[i].innerHTML.includes(lang)) {
-            languageOptions[i].click();
-            break;
-          }
+        const languageSelect = googleFrameDoc.querySelector('select');
+        if (languageSelect) {
+          languageSelect.value = lang;
+          languageSelect.dispatchEvent(new Event('change'));
         }
       }
     }
@@ -79,7 +81,7 @@ export default function WebTranslator() {
               backgroundColor: '#333',
               color: '#fff',
             }}
-            onClick={() => changeLanguage('hi')}
+            onClick={() => changeLanguage(currentLanguage === 'en' ? 'hi' : 'en')} // Toggle language
           >
             <span
               style={{
@@ -92,9 +94,9 @@ export default function WebTranslator() {
                 alignItems: 'center',
               }}
             >
-              {languages.find(lang => lang.value === currentLanguage)?.symbol}
+              {languages.find((lang) => lang.value === currentLanguage)?.symbol}
             </span>
-            {languages.find(lang => lang.value === currentLanguage)?.label}
+            {languages.find((lang) => lang.value === currentLanguage)?.label}
           </Button>
         </Box>
       </div>
