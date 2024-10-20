@@ -1,6 +1,7 @@
 import React from "react"
 import { Card, CardContent, Typography, Grid, Container } from '@mui/material';
 import { PanTool as HandIcon, Computer as MonitorIcon, Search as SearchIcon } from '@mui/icons-material';
+import Nav from '../Landingpage/Navbarland'
 
 const Landing = () => {
   const features = [
@@ -36,6 +37,8 @@ const Landing = () => {
     </Card>
   );
   return (
+<>
+<Nav/>
 <main className="flex-grow container mx-auto px-4 py-20">
   <div className="flex flex-col md:flex-row items-center justify-between mt-16 space-y-8 md:space-y-0 md:space-x-9">
     {/* Left Section: Text Content */}
@@ -87,6 +90,7 @@ const Landing = () => {
     </>
   </>
 </main>
+</>
   )
 };
 

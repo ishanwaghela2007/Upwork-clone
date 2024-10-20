@@ -11,9 +11,11 @@ const App = () => {
     <Router>
       <Routes>
           <Route path='/' element={<UserLayout />}>
-          <Route index element={<Landing />}/>
-          <Route path='Auth' element={<Auth />} />
-          <Route path='home' element={<Home/>} />
+          <Route index path='Landing' element={<Landing />} />
+          <Route path='home' element={<Home/>}/>
+          <Route path='Auth' element={<Auth/>} 
+          />
+
         </Route>
         <Route path='/admin' element={<Landing/>} >
         
