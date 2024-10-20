@@ -21,3 +21,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 **Note:** Please ensure that code pushed to this repository is free of errors.
+**Ref:**https://opensource.org/license/mit.
