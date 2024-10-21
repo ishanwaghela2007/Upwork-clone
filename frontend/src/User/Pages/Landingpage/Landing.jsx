@@ -25,13 +25,13 @@ const Landing = () => {
     }
   ];
   const FeatureCard = ({ icon: Icon, title, description, imageUrl }) => (
-    <Card className="flex flex-col md:flex-row items-center overflow-hidden">
-      <div className="h-40 md:h-auto md:w-48 flex-shrink-0">
+    <Card className="flex flex-col h-full">
+      <div className="h-48 flex-shrink-0">
         <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
       </div>
-      <CardContent className="p-6 flex flex-col justify-between">
+      <CardContent className="flex flex-col flex-grow p-6">
         <Typography variant="h5" className="mb-2">{title}</Typography>
-        <Typography variant="body2" color="textSecondary">{description}</Typography>
+        <Typography variant="body2" color="textSecondary" className="flex-grow">{description}</Typography>
         <Icon className="mt-4 h-6 w-6 text-primary" />
       </CardContent>
     </Card>
@@ -76,16 +76,22 @@ const Landing = () => {
     </div>
     {/*second main component*/}
     <section className="container mx-auto px-4 py-8">
-        <Grid container spacing={3}>
+        <Grid container spacing={3} className="h-full">
           {features.map((feature, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <FeatureCard {...feature} />
+            <Grid item xs={12} md={4} key={index} className="h-full">
+              <FeatureCard {...feature} className="h-full" />
             </Grid>
           ))}
         </Grid>
       </section>
     <>
     {/*third main component*/}
+      <div className="text-center text-xl h-screen w-full flex items-center justify-center">
+        <h1 className="text-4xl font-bold">Enhance your Freelancing game with Smart Freelancers</h1>
+      </div>
+    </>
+    <>
+    {/* Fourth main component  */}
     
     </>
   </>
@@ -95,5 +101,6 @@ const Landing = () => {
 };
 
 export default Landing;
+
 
 

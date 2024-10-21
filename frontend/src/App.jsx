@@ -4,18 +4,20 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserLayout from './User/Userlayout';
 import Landing from './User/Pages/Landingpage/Landing';
 import Home from './User/Pages/Home/Home';
-import Auth from './User/Pages/Auth/Auth';
+import SignUp from './User/Pages/SignUp/SignUp';
+import Login from './User/Pages/Login/Login';
+
+
 
 const App = () => {
   return (
     <Router>
       <Routes>
-          <Route path='/' element={<UserLayout />}>
-          <Route index path='Landing' element={<Landing />} />
-          <Route path='home' element={<Home/>}/>
-          <Route path='Auth' element={<Auth/>} 
-          />
-
+        <Route path='/' element={<UserLayout />}>
+          <Route index element={<Landing />} />
+          <Route path='home' element={<Home />} />
+          <Route path='signup' element={<SignUp />} />
+          <Route path='login' element={<Login />} />
         </Route>
         <Route path='/admin' element={<Landing/>} >
         
