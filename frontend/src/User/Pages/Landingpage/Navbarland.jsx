@@ -34,9 +34,10 @@ const Navbarland = () => {
           </div>
           <div className="hidden md:flex items-center space-x-3">
             <Link to="/" className="py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300">Home</Link>
-            <Link to="/about" className="py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300">About</Link>
-            <Link to="/services" className="py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300">Services</Link>
-            <Link to="/contact" className="py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300">Contact</Link>
+            <Link to="/#" className="py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300">About</Link>
+            <Link to="/#" className="py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300">Services</Link>
+            <Link to="/#" className="py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300">Subscription</Link>
+            <Link to="/Contact" className="py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300">Contact</Link>
             <Link to="/signup" className="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Sign Up</Link>
           </div>
         </div>

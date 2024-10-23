@@ -6,6 +6,8 @@ import Landing from './User/Pages/Landingpage/Landing';
 import Home from './User/Pages/Home/Home';
 import SignUp from './User/Pages/SignUp/SignUp';
 import Login from './User/Pages/Login/Login';
+import ContactUs from './User/Pages/Contact/contact';
+import Error from './User/Pages/Error/404'
 
 
 
@@ -18,6 +20,8 @@ const App = () => {
           <Route path='home' element={<Home />} />
           <Route path='signup' element={<SignUp />} />
           <Route path='login' element={<Login />} />
+          <Route path='Contact' element={<ContactUs/>}/>
+          <Route path='*' element={<Error/>}/>
         </Route>
         <Route path='/admin' element={<Landing/>} >
         

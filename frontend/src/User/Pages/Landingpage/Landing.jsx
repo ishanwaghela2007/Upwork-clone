@@ -6,7 +6,6 @@ import {
   Search as SearchIcon,
 } from "@mui/icons-material";
 import Nav from "../Landingpage/Navbarland";
-import FooterLand from './Footerland';
 import Button from './button'
 import { useState } from "react";
 
@@ -183,6 +182,39 @@ const Landing = () => {
               </h1>
               <Button />
             </div>
+          </>
+          <>
+          {/*Fourth section */}
+          <div className="text-center py-8 bg-gray-100">
+            <h1 className="text-4xl font-bold mb-4">Subscribe to our Website</h1>
+            <p className="text-xl mb-6">Stay updated with the latest job opportunities and news.</p>
+            <form 
+              className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4"
+              onSubmit={(e) => {
+                e.preventDefault();
+              const form = e.target;
+              const emailInput = form.querySelector('input[type="email"]');
+              emailInput.value = '';
+              emailInput.placeholder = 'Thank you for subscribing!';
+              setTimeout(() => {
+                emailInput.placeholder = 'Enter your email';
+              }, 3000);
+              }}
+            >
+              <input
+                type="email"
+                placeholder="Enter your email"
+                required
+                className="p-3 border border-gray-300 rounded-md w-full md:w-1/3"
+              />
+              <button
+                type="submit"
+                className="p-3 bg-blue-500 text-white rounded-md w-full md:w-auto"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
           </>
         </>
       </main>
