@@ -77,7 +77,7 @@ const Landing = () => {
               ambitions into reality.
             </p>
             <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">
-              Create Profile
+             Get Started
             </button>
           </div>
 
