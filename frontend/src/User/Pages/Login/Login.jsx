@@ -1,20 +1,29 @@
-import React from 'react';
-import { FaGoogle, FaGithub, FaLinkedin } from 'react-icons/fa'; // You'll need to install react-icons
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
+import { FaGoogle, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Login = () => {
-  const handleGoogleLogin = () => {
-    // Implement Google login logic
-    console.log('Google login clicked');
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { login } = useUser(); // Access login function from context
+  const navigate = useNavigate();
 
-  const handleGithubLogin = () => {
-    // Implement GitHub login logic
-    console.log('GitHub login clicked');
-  };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
-  const handleLinkedinLogin = () => {
-    // Implement LinkedIn login logic
-    console.log('LinkedIn login clicked');
+    const success = await login(email, password);
+    if (success) {
+      alert("Login successful!");
+      navigate("/home"); // Redirect to protected route
+    } else {
+      setError("Invalid email or password.");
+    }
+    setLoading(false);
   };
 
   return (
@@ -25,13 +34,13 @@ const Login = () => {
             Sign in to your account
           </h2>
         </div>
-        
-        {/* Traditional Login Form */}
-        <form className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
@@ -40,19 +49,22 @@ const Login = () => {
             <div>
               <input
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
               />
             </div>
           </div>
-
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <div>
             <button
               type="submit"
+              disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Sign in
+              {loading ? "Signing in..." : "Sign in"}
             </button>
           </div>
         </form>
@@ -64,29 +76,19 @@ const Login = () => {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-gray-50 text-gray-500">Or continue with</span>
+              <span className="px-2 bg-gray-50 text-gray-500">
+                Or continue with
+              </span>
             </div>
           </div>
-
           <div className="mt-6 grid grid-cols-3 gap-3">
-            <button
-              onClick={handleGoogleLogin}
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-            >
+            <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
               <FaGoogle className="text-xl" />
             </button>
-
-            <button
-              onClick={handleGithubLogin}
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-            >
+            <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
               <FaGithub className="text-xl" />
             </button>
-
-            <button
-              onClick={handleLinkedinLogin}
-              className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-            >
+            <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
               <FaLinkedin className="text-xl" />
             </button>
           </div>

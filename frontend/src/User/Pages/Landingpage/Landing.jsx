@@ -8,6 +8,7 @@ import {
 import Nav from "../Landingpage/Navbarland";
 import Button from './button'
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   const features = [
@@ -76,9 +77,9 @@ const Landing = () => {
               growth. Join a thriving community and turn your freelance
               ambitions into reality.
             </p>
-            <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">
-             Get Started
-            </button>
+            <Link to="/login" className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">
+              Get Started
+            </Link>
           </div>
 
           {/* Right Section: Image */}
