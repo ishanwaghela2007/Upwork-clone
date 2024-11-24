@@ -78,7 +78,7 @@ const Landing = () => {
                 growth. Join a thriving community and turn your freelance
                 ambitions into reality.
               </p>
-              <Link to="/Dashboard" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg">
+              <Link to="/admin/adminlogin" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg">
                 Get Started
               </Link>
             </div>
