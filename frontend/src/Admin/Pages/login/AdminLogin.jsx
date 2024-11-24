@@ -10,14 +10,29 @@ const AdminLogin = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+    if (!email || !password) {
+      alert("Please enter both email and password");
+      return;
+    }
+
     setLoading(true);
     
-    // Simulate login delay
-    setTimeout(() => {
+    try {
+      // Simulate login delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Here you would typically validate credentials with backend
+      // For now just checking if fields are filled
+      if (email && password) {
+        setLoading(false);
+        alert("Login successful!");
+        navigate("/admin/Dashboard");
+      }
+    } catch (error) {
       setLoading(false);
-      alert("Login successful!");
-      navigate("/admin/Dashboard");
-    }, 1000);
+      alert("Login failed. Please try again.");
+    }
   };
 
   return (
@@ -55,7 +70,6 @@ const AdminLogin = () => {
             <button 
               type="submit"
               disabled={loading}
-              onClick={() => navigate('/admin/Dashboard')}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               {loading ? "Signing in..." : "Sign in"}
