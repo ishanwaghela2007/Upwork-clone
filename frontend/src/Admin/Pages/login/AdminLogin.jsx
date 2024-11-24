@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaGoogle, FaGithub, FaLinkedin } from "react-icons/fa";
 
-const Login = () => {
+const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ const Login = () => {
     setTimeout(() => {
       setLoading(false);
       alert("Login successful!");
-      navigate("/home");
+      navigate("/admin/Dashboard");
     }, 1000);
   };
 
@@ -55,7 +55,7 @@ const Login = () => {
             <button 
               type="submit"
               disabled={loading}
-              onClick={() => navigate('/home')}
+              onClick={() => navigate('/admin/Dashboard')}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               {loading ? "Signing in..." : "Sign in"}
@@ -92,4 +92,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

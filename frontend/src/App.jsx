@@ -11,6 +11,7 @@ import Error from './User/Pages/Error/404'
 import Dashboard from './Admin/Pages/Dashboard/Dashboard';
 import Adminlayout from './Admin/Adminlayout';
 import AdminLand from './Admin/Pages/AdminLand/AdminLanding'
+import AdminLogin from './Admin/Pages/login/AdminLogin';
 
 const App = () => {
   return (
@@ -26,11 +27,8 @@ const App = () => {
         </Route>
         <Route path='/admin' element={<Adminlayout/>}>
         <Route index element={<AdminLand/>}/>
-        <Route path='Dashboard' element={<Dashboard/>}/>
-        
-        
-
-        
+        <Route path='Dashboard' element={<Dashboard/>}/>        \
+        <Route path='adminlogin' element={<AdminLogin/>}/>
         </Route>
       </Routes>
     </Router>

@@ -131,7 +131,7 @@ const ContactUs = () => {
             </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               <Email sx={{ mr: 1, color: 'text.secondary' }} />
-              <Typography variant="body1">support@example.com</Typography>
+              <Typography variant="body1">support@FreelanceIndia.com</Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               <Phone sx={{ mr: 1, color: 'text.secondary' }} />
