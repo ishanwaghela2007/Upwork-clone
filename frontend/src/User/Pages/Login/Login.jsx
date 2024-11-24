@@ -11,6 +11,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     
+    // Check for empty values
     if (!email || !password) {
       alert("Please enter both email and password");
       return;
