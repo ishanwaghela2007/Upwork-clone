@@ -1,29 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../context/UserContext";
 import { FaGoogle, FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const { login } = useUser(); // Access login function from context
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
-
-    const success = await login(email, password);
-    if (success) {
+    
+    // Simulate login delay
+    setTimeout(() => {
+      setLoading(false);
       alert("Login successful!");
-      navigate("/home"); // Redirect to protected route
-    } else {
-      setError("Invalid email or password.");
-    }
-    setLoading(false);
+      navigate("/home");
+    }, 1000);
   };
 
   return (
@@ -57,7 +51,6 @@ const Login = () => {
               />
             </div>
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
           <div>
             <button
               type="submit"

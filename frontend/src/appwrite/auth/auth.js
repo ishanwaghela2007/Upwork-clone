@@ -54,11 +54,13 @@ export class AuthServices {
 
   async verification() {
     try {
-      return await this.Account.createVerification(
-        `${window.location.origin}/verify`
+      const promise = await this.Account.createVerification(
+        `${window.location.origin}/verify-email`
       );
+      return promise;
     } catch (error) {
-      throw new Error(`Verification email sending failed: ${error.message}`);
+      console.error("Appwrite service error:", error);
+      throw new Error(`Appwrite verification failed: ${error.message}`);
     }
   }
 }

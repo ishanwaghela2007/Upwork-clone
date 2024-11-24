@@ -5,8 +5,8 @@ import {
   Computer as MonitorIcon,
   Search as SearchIcon,
 } from "@mui/icons-material";
-import NavLand from "../Landingpage/Navbarland";
-import LandButton from './button'
+import Nav from './Nav'
+import Button from "./Button";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -62,7 +62,7 @@ const Landing = () => {
 
   return (
     <>
-      <NavLand />
+      <Nav />
       <main className="flex-grow bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 py-20">
           <div className="flex flex-col md:flex-row items-center justify-between mt-16 space-y-8 md:space-y-0 md:space-x-9">
@@ -78,7 +78,7 @@ const Landing = () => {
                 growth. Join a thriving community and turn your freelance
                 ambitions into reality.
               </p>
-              <Link to="/login" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg">
+              <Link to="/Dashboard" className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg">
                 Get Started
               </Link>
             </div>
@@ -175,7 +175,7 @@ const Landing = () => {
               Ready to start your<br/>
               Freelancing journey with us?
             </h1>
-            <LandButton/>
+            <Button />
           </div>
 
           <div className="text-center py-16 bg-indigo-900 rounded-lg shadow-xl">

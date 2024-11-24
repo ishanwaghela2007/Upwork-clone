@@ -1,77 +1,93 @@
-import { createContext, useContext, useState } from 'react'
-import AuthServices from '../../appwrite/auth/auth'
+import React, { createContext, useContext, useState, useEffect } from "react";
+import authServices from "../../appwrite/auth/auth";
 
-const UserContext = createContext()
+const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-    const login = async (email, password) => {
-        try {
-            const session = await AuthServices.login({ email, password })
-            if (session) {
-                const userData = await AuthServices.getCurrentUser()
-                setUser(userData)
-                return true
-            }
-            return false
-        } catch (error) {
-            console.error("Login error:", error)
-            return false
-        }
+  // Get current user on app load
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const currentUser = await authServices.getCurrentUser();
+        setUser(currentUser);
+        setIsAuthenticated(true);
+      } catch {
+        setUser(null);
+        setIsAuthenticated(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  // Signup
+  const signup = async (signupData) => {
+    try {
+      const userAccount = await authServices.signup(signupData);
+      setUser(userAccount);
+      setIsAuthenticated(true);
+      return true;
+    } catch (error) {
+      console.error(error.message);
+      return false;
     }
+  };
 
-    const signup = async (firstname, lastname, email, password, confirmpassword) => {
-        try {
-            const session = await AuthServices.signup({ firstname, lastname, email, password, confirmpassword })
-            if (session) {
-                const userData = await AuthServices.getCurrentUser()
-                setUser(userData)
-                return true
-            }
-            return false
-        } catch (error) {
-            console.error("Signup error:", error)
-            return false
-        }
+  // Login
+  const login = async (loginData) => {
+    try {
+      const session = await authServices.login(loginData);
+      const currentUser = await authServices.getCurrentUser();
+      setUser(currentUser);
+      setIsAuthenticated(true);
+      return true;
+    } catch (error) {
+      console.error(error.message);
+      return false;
     }
+  };
 
-    const logout = async () => {
-        try {
-            await AuthServices.logout()
-            setUser(null)
-            return true
-        } catch (error) {
-            console.error("Logout error:", error)
-            return false
-        }
+  // Logout
+  const logout = async () => {
+    try {
+      await authServices.logout();
+      setUser(null);
+      setIsAuthenticated(false);
+    } catch (error) {
+      console.error(error.message);
     }
+  };
 
-    const verification = async () => {
-        try {
-            const response = await AuthServices.verification()
-            return response
-        } catch (error) {
-            console.error("Verification error:", error)
-            return false
-        }
+  // Send email verification
+  const sendVerification = async () => {
+    try {
+      await authServices.verification();
+      alert("Verification email sent! Check your inbox.");
+    } catch (error) {
+      console.error(error.message);
     }
+  };
 
-    const value = {
+  return (
+    <UserContext.Provider
+      value={{
         user,
-        login,
+        isAuthenticated,
+        loading,
         signup,
+        login,
         logout,
-        verification
-    }
+        sendVerification,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
+};
 
-    return (
-        <UserContext.Provider value={value}>
-            {children}
-        </UserContext.Provider>
-    )
-}
-
-export const useUser = () => {
-    return useContext(UserContext)
-}
+export const useUser = () => useContext(UserContext);

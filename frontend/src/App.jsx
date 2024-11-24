@@ -8,6 +8,9 @@ import Signup from './User/Pages/SignUp/SignUp'
 import Login from './User/Pages/Login/Login';
 import ContactUs from './User/Pages/Contact/contact';
 import Error from './User/Pages/Error/404'
+import Dashboard from './Admin/Pages/Dashboard/Dashboard';
+import Adminlayout from './Admin/Adminlayout';
+import AdminLand from './Admin/Pages/AdminLand/AdminLanding'
 
 const App = () => {
   return (
@@ -21,7 +24,10 @@ const App = () => {
           <Route path='Contact' element={<ContactUs/>}/>
           <Route path='*' element={<Error/>}/>
         </Route>
-        <Route path='/admin' element={<Landing/>}>
+        <Route path='/admin' element={<Adminlayout/>}>
+        <Route index element={<AdminLand/>}/>
+        <Route path='Dashboard' element={<Dashboard/>}/>
+        
         
 
         
