@@ -10,30 +10,14 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
-    // Check for empty values
-    if (!email || !password) {
-      alert("Please enter both email and password");
-      return;
-    }
-
     setLoading(true);
     
-    try {
-      // Simulate login delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Here you would typically validate credentials with backend
-      // For now just checking if fields are filled
-      if (email && password) {
-        setLoading(false);
-        alert("Login successful!");
-        navigate("/home");
-      }
-    } catch (error) {
+    // Simulate login delay
+    setTimeout(() => {
       setLoading(false);
-      alert("Login failed. Please try again.");
-    }
+      alert("Login successful!");
+      navigate("/home");
+    }, 1000);
   };
 
   return (
@@ -68,7 +52,7 @@ const Login = () => {
             </div>
           </div>
           <div>
-            <button 
+            <button  
               type="submit"
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
