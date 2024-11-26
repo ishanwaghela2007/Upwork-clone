@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaGoogle, FaGithub, FaLinkedin } from "react-icons/fa";
 
-const AdminLogin = () => {
+const AdminLogin = ({ validEmail = "ishanwaghela2007@gmail.com", validPassword = "ishan1980" }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,16 +22,17 @@ const AdminLogin = () => {
       // Simulate login delay
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Here you would typically validate credentials with backend
-      // For now just checking if fields are filled
-      if (email && password) {
+      // Validate credentials against props
+      if (email === validEmail && password === validPassword) {
         setLoading(false);
         alert("Login successful!");
         navigate("/admin/Dashboard");
+      } else {
+        throw new Error("Invalid credentials");
       }
     } catch (error) {
       setLoading(false);
-      alert("Login failed. Please try again.");
+      alert("Login failed. Please check your email and password.");
     }
   };
 
