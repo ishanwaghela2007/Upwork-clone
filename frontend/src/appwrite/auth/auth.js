@@ -8,29 +8,32 @@ export class AuthServices {
     this.Account = new Account(this.Client);
   }
 
-  async signup({ firstname, lastname, email, password, confirmpassword }) {
+  async signup(formdata) {
+    const {firstName,lastName,email,password} = formdata;
     try {
-      if (password !== confirmpassword) {
-        throw new Error("Passwords do not match");
-      }
       const userAccount = await this.Account.create(
         ID.unique(),
         email,
         password,
-        `${firstname} ${lastname}`
+        `${firstName} ${lastName}`
       );
-      if (userAccount) {
-        return this.login({ email, password });
-      }
-      return userAccount;
+      //account verfication 
+      await this.Account.createVerification();
+      console.log("Account Created :- ",userAccount)
+      return{ 
+        status: "success",
+        message: "Account created! Please check your email to verify your account.",
+        userAccount, 
+      };
     } catch (error) {
       throw new Error(`Signup unsuccessful: ${error.message}`);
     }
   }
 
-  async login({ email, password }) {
+  async login(formdata) {
+    const {email,password}=formdata;
     try {
-      return await this.Account.createEmailSession(email, password);
+      return await this.Account.createEmailPasswordSession(email, password);
     } catch (error) {
       throw new Error(`Login unsuccessful: ${error.message}`);
     }
@@ -49,18 +52,6 @@ export class AuthServices {
       await this.Account.deleteSession("current");
     } catch (error) {
       throw new Error(`Logout unsuccessful: ${error.message}`);
-    }
-  }
-
-  async verification() {
-    try {
-      const promise = await this.Account.createVerification(
-        `${window.location.origin}/verify-email`
-      );
-      return promise;
-    } catch (error) {
-      console.error("Appwrite service error:", error);
-      throw new Error(`Appwrite verification failed: ${error.message}`);
     }
   }
 }

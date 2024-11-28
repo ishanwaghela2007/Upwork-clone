@@ -1,23 +1,36 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaGoogle, FaGithub, FaLinkedin } from "react-icons/fa";
+import authServices, { AuthServices } from "../../../appwrite/auth/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
-    // Simulate login delay
-    setTimeout(() => {
+    setError("");
+
+    try {
+      const formData = {
+        email,
+        password
+      };
+      const user = await authServices.login(formData);
+      console.log("User logged in:", user);
+      // On successful login
       setLoading(false);
-      alert("Login successful!");
-      navigate("/home");
-    }, 1000);
+      navigate("/verify")
+      
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+      console.error("Login error:", error);
+    }
   };
 
   return (
@@ -29,6 +42,11 @@ const Login = () => {
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+          {error && (
+            <div className="text-red-500 text-sm text-center">
+              {error}
+            </div>
+          )}
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <input

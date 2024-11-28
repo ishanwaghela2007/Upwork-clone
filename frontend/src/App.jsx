@@ -10,8 +10,8 @@ import ContactUs from './User/Pages/Contact/contact';
 import Error from './User/Pages/Error/404'
 import Dashboard from './Admin/Pages/Dashboard/Dashboard';
 import Adminlayout from './Admin/Adminlayout';
-import AdminLand from './Admin/Pages/AdminLand/AdminLanding'
-import AdminLogin from './Admin/Pages/login/AdminLogin';
+import Verify from './User/Pages/Login/verify';
+
 
 const App = () => {
   return (
@@ -24,11 +24,11 @@ const App = () => {
           <Route path='Signup' element={<Signup/>}/>
           <Route path='Contact' element={<ContactUs/>}/>
           <Route path='*' element={<Error/>}/>
+          <Route paht='verify' element={<Verify/>}/>
         </Route>
         <Route path='/admin' element={<Adminlayout/>}>
-        <Route index element={<AdminLand/>}/>
-        <Route path='Dashboard' element={<Dashboard/>}/>        \
-        <Route path='adminlogin' element={<AdminLogin/>}/>
+        <Route index element={<Login/>}/>
+        <Route path='Dashboard' element={<Dashboard/>}/>
         </Route>
       </Routes>
     </Router>

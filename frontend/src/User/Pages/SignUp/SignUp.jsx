@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link ,useNavigate} from 'react-router-dom';
+import authServices from '../../../appwrite/auth/auth';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -46,11 +47,14 @@ const SignUp = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Handle form submission here
+      const user = await authServices.signup(formData)
       console.log('Form submitted:', formData);
+      alert("Check your email to verify your account.");
+      console.log('User created:', user);
+       
       navigate('/');
       alert("Acknowledged and Thankyou")
     }

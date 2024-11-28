@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -11,13 +11,36 @@ import {
   Box
 } from '@mui/material';
 import Profile from './profile';
+import authServices from '../../../appwrite/auth/auth';
 
 const Home = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-  const handleLogout = () => {
-    // Clear any auth tokens/state here
-    navigate('/'); // Redirect to landing page
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const currentUser = await authServices.getCurrentUser();
+        if (!currentUser) {
+          navigate('/login');
+          return;
+        }
+        setUser(currentUser);
+      } catch (error) {
+        console.error("Auth error:", error);
+        navigate('/login');
+      }
+    };
+    checkUser();
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await authServices.logout();
+      navigate('/login');
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
