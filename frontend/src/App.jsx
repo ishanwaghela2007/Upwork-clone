@@ -10,7 +10,6 @@ import ContactUs from './User/Pages/Contact/contact';
 import Error from './User/Pages/Error/404'
 import Dashboard from './Admin/Pages/Dashboard/Dashboard';
 import Adminlayout from './Admin/Adminlayout';
-import Verify from './User/Pages/Login/verify';
 
 
 const App = () => {
@@ -24,7 +23,6 @@ const App = () => {
           <Route path='Signup' element={<Signup/>}/>
           <Route path='Contact' element={<ContactUs/>}/>
           <Route path='*' element={<Error/>}/>
-          <Route paht='verify' element={<Verify/>}/>
         </Route>
         <Route path='/admin' element={<Adminlayout/>}>
         <Route index element={<Login/>}/>

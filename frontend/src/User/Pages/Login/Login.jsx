@@ -24,7 +24,7 @@ const Login = () => {
       console.log("User logged in:", user);
       // On successful login
       setLoading(false);
-      navigate("/verify")
+      navigate("/home")
       
     } catch (error) {
       setLoading(false);
