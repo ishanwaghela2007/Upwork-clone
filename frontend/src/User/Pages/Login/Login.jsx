@@ -35,7 +35,7 @@ const Login = () => {
   const handleauth0=async(e)=>
   {
   try {
-    const user=authServices.loginwithauthO();
+    const user= await authServices.loginwithauthO();
     console.log("User logged in:", user);
     setLoading(false);
     navigate('/home')
