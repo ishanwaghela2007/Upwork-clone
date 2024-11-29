@@ -32,19 +32,19 @@ const Login = () => {
       console.error("Login error:", error);
     }
   };
-  const handleauth0=async(e)=>
-  {
-  try {
-    const user= await authServices.loginwithauthO();
-    console.log("User logged in:", user);
-    setLoading(false);
-    navigate('/home')
-  } catch (error) {
-    setLoading(false);
-    setError(error.message);
-    console.log("login error",error);
-  }
-};
+//   const handleauth0=async(e)=>
+//   {
+//   try {
+//     const user= await authServices.loginwithauthO();
+//     console.log("User logged in:", user);
+//     setLoading(false);
+//     navigate('/home')
+//   } catch (error) {
+//     setLoading(false);
+//     setError(error.message);
+//     console.log("login error",error);
+//   }
+// };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
