@@ -178,7 +178,7 @@ const Landing = () => {
             <LandButton/>
           </div>
 
-          <div className="text-center py-16 bg-indigo-900 rounded-lg shadow-xl">
+          <div className="text-center py-16  bg-green-500  rounded-lg shadow-xl">
             <h1 className="text-4xl font-bold mb-4 text-white">Subscribe to our Website</h1>
             <p className="text-xl mb-6 text-indigo-100">Stay updated with the latest job opportunities and news.</p>
             <form 

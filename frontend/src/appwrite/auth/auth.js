@@ -8,6 +8,7 @@ export class AuthServices {
     this.Account = new Account(this.Client);
   }
 
+ 
   async signup(formdata) {
     const {firstName,lastName,email,password} = formdata;
     try {
@@ -46,6 +47,13 @@ export class AuthServices {
       throw new Error(`Account not found: ${error.message}`);
     }
   }
+  async loginwithauthO() {
+    try {
+      this.Account.createOAuth2Session('auth0');
+    } catch (error) {
+      throw new error("login unscussefull",error)
+    }
+ }
 
   async logout() {
     try {

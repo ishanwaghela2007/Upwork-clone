@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaGoogle, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGoogle, FaGithub, FaTwitter } from "react-icons/fa";
 import authServices, { AuthServices } from "../../../appwrite/auth/auth";
 
 const Login = () => {
@@ -32,6 +32,19 @@ const Login = () => {
       console.error("Login error:", error);
     }
   };
+  const handleauth0=async(e)=>
+  {
+  try {
+    const user=authServices.loginwithauthO();
+    console.log("User logged in:", user);
+    setLoading(false);
+    navigate('/home')
+  } catch (error) {
+    setLoading(false);
+    setError(error.message);
+    console.log("login error",error);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -93,14 +106,14 @@ const Login = () => {
             </div>
           </div>
           <div className="mt-6 grid grid-cols-3 gap-3">
-            <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+            <button onClick={handleauth0} className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
               <FaGoogle className="text-xl" />
             </button>
-            <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+            <button onClick={handleauth0}className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
               <FaGithub className="text-xl" />
             </button>
-            <button className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-              <FaLinkedin className="text-xl" />
+            <button onClick={handleauth0}className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+              <FaTwitter className="text-xl" />
             </button>
           </div>
         </div>
@@ -108,5 +121,6 @@ const Login = () => {
     </div>
   );
 };
+
 
 export default Login;
