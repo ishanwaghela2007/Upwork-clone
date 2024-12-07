@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaGoogle, FaGithub, FaTwitter } from "react-icons/fa";
 import authServices, { AuthServices } from "../../../appwrite/auth/auth";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");

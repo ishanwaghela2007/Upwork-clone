@@ -178,9 +178,9 @@ const Landing = () => {
             <LandButton/>
           </div>
 
-          <div className="text-center py-16  bg-green-500  rounded-lg shadow-xl">
-            <h1 className="text-4xl font-bold mb-4 text-white">Subscribe to our Website</h1>
-            <p className="text-xl mb-6 text-indigo-100">Stay updated with the latest job opportunities and news.</p>
+          <div className="text-center py-16  bg-blue-200 rounded-lg shadow-xl">
+            <h1 className="text-4xl font-bold mb-4 text-black">Subscribe to our Website</h1>
+            <p className="text-xl mb-6 text-black">Stay updated with the latest job opportunities and news.</p>
             <form 
               className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4"
               onSubmit={(e) => {

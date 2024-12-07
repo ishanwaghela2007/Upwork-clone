@@ -1,6 +1,5 @@
 import Conf from "../../config/conf";
 import { Client, Account, ID } from "appwrite";
-
 export class AuthServices {
   constructor() {
     this.Client = new Client();
