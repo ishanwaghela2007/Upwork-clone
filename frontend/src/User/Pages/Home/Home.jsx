@@ -11,36 +11,34 @@ import {
   Box
 } from '@mui/material';
 import Profile from './profile';
-import authServices from '../../../appwrite/auth/auth';
+import axios from 'axios';
 
 const Home = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const currentUser = await authServices.getCurrentUser();
-        if (!currentUser) {
-          navigate('/login');
-          return;
-        }
-        setUser(currentUser);
-      } catch (error) {
-        console.error("Auth error:", error);
+    if (!token) {
+      navigate('/login');
+    }
+  }, [token, navigate]);
+
+  const handleLogout = () => {
+    axios.get(`${import.meta.env.VITE_BASEURL_URL}/api/auth/logout`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        localStorage.removeItem('token');
         navigate('/login');
       }
-    };
-    checkUser();
-  }, [navigate]);
-
-  const handleLogout = async () => {
-    try {
-      await authServices.logout();
-      navigate('/login');
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
+    })
+    .catch((error) => {
+      // Handle error here
+      console.error('Logout failed', error);
+    });
   };
 
   return (
