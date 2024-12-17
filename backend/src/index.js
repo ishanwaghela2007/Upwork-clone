@@ -27,7 +27,7 @@ app.use('/api/feed', feedRoutes);
 app.use(errorMiddleware);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/upwork-clone', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://ishan:<db_password>@cluster0.n3fya.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
