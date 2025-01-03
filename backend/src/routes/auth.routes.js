@@ -16,4 +16,5 @@ router.post('/login', [
   body('password').exists()
 ], authController.login);
 
+router.post('/logout',authController.logout);
 module.exports = router;

@@ -70,15 +70,15 @@ exports.login = async (req, res, next) => {
     next(error);
   }
 };
-
 exports.logout = async (req, res, next) => {
   try {
+    // Check if the token is present in the request headers
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
       throw new AppError('No token provided', 401);
     }
 
-    // Add the token to a blacklist
+    // Add the token to the blacklist
     await BlacklistToken.create({ token });
 
     res.status(200).json({
