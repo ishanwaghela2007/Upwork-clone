@@ -28,7 +28,7 @@ app.use('/api/feed', feedRoutes);
 app.use(errorMiddleware);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://waghelaishan2007:DGPRAn801bp6bCkT@cluster0.sdwsz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect(process.env.MONGODB_URI  {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
