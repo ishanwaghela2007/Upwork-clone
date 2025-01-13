@@ -28,7 +28,7 @@ app.use('/api/feed', feedRoutes);
 app.use(errorMiddleware);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI  {
+mongoose.connect(process.env.MONGODB_URI) {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
